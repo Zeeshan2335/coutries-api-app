@@ -33,7 +33,7 @@ const CardDetail = ({ setToggle, ItemName, trfData, setDisplayNone }) => {
         <div>
           <div className="btn_div">
             <button className="btn" onClick={handleBack}>
-              Bank
+              Back
             </button>
           </div>
           <div className="card_details">

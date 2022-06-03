@@ -10,15 +10,17 @@ const CoutriesData = () => {
   const [search, setSearch] = useState("");
   const [fltrRegion, setFltrRegion] = useState([]);
   const [toggle, setToggle] = useState(true);
+  const [hideInput, setInput] = useState(true);
   const [displayNone, setDisplayNone] = useState("");
   const [ItemName, setItemName] = useState([]);
 
   console.log("item Name==>  ", ItemName);
 
- 
   console.log(fltrRegion);
 
   const handleRegionFltr = (region) => {
+    setInput(false);
+
     const FilterAfrica = fltrRegion.filter((item) => item.region == "Africa");
     const FilterAmericas = fltrRegion.filter(
       (item) => item.region == "Americas"
@@ -33,12 +35,16 @@ const CoutriesData = () => {
     if (region === "Asia") setCoutries([...FilterAsia]);
     if (region === "Oceania") setCoutries([...FilterOceania]);
   };
-  ////////////////////////////////////////////////////////////////////////
+
   const goToCard = () => {
     setToggle(false);
     setDisplayNone("display");
   };
-  ////////////////////////////////////////////////////////////////////////////
+
+  const backToHome = () => {
+    setInput(true);
+    getApi();
+  };
 
   const getApi = async () => {
     const result = await axios.get("https://restcountries.com/v2/all");
@@ -66,11 +72,17 @@ const CoutriesData = () => {
       {" "}
       <div className="head_container" id={displayNone}>
         <div className="input_container">
-          <input
-            type="text"
-            placeholder="Search Country Name"
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          {hideInput === true ? (
+            <input
+              type="text"
+              placeholder="Search Country Name"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          ) : (
+            <button className="btn" onClick={backToHome}>
+              Back
+            </button>
+          )}
         </div>
 
         <div className="filter_div">

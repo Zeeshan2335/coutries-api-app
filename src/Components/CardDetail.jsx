@@ -10,7 +10,7 @@ const CardDetail = ({ setToggle, ItemName, trfData, setDisplayNone }) => {
   const [saveName, setSaveName] = useState(ItemName);
 
   const handleBack = () => {
-    setToggle(true);
+    setToggle(true);//this is for route the component
     setDisplayNone("");
   };
 
